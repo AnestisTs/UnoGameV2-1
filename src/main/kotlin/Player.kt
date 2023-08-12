@@ -9,8 +9,7 @@ open class Player(var name: String) {
 
    open fun countingWins(){
 
-
-    }
+   }
 
 
    open fun showStats(){                // ? zeigt die stats

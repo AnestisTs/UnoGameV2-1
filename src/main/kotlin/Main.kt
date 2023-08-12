@@ -27,8 +27,8 @@ fun main() {
                 }
                 if (userInputPlayers in 2..4) {
                     val unoGame: UnoGame = UnoGame(userInputPlayers, playerNames)
-                    unoGame.startGame()                         // ! evtl tauschen?
-                    println("Du hast nicht zwischen 2-4 Spielern ausgewählt. Lies das nochmal und versuchs erneut..")
+                    unoGame.startGame()
+   //                 println("Du hast nicht zwischen 2-4 Spielern ausgewählt. Lies das nochmal und versuchs erneut..")
                 }
             } else if (userInput == "nein") {
                 println("Angst, Potter? Dann ein andern Mal.")

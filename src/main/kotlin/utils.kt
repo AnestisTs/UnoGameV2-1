@@ -12,7 +12,7 @@
 // ? Kosmetische verbesserung. Kommentare über den Code schreiben
 // ! Player klasse erstellen statt in der UnoGame.kt bsp name hand. evtl punkte Stand Mehr funktionen ( kampschrei )
 // ! stats funktion
-
+// ! user / KIuser erbt von player
 
 // * FARBE DER KARTEN *
 
