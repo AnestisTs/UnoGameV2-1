@@ -19,9 +19,9 @@ open class Player(var name: String) {
 
     open fun addStackToDeck(deck: MutableList<Card>, stack: MutableList<Card>, currentCard: Card){
 
-        stack.removeAt(0)       // ! was passiert hier?             // Karte wird runter genommen und zum stack hinzugegüht
+        stack.removeAt(0)                    // Karte wird runter genommen und zum stack hinzugegüht
         deck.addAll(stack)                                              // * Mit addAll werden Listen zu Listen hinzugefügt
-        stack.clear()              // ! hier fehlerhaft
+        stack.clear()
         if (currentCard != null){                                       // ! Card könnte auch null sein, deswegen muss hier gecheckt werden, ob es ungleich null ist.
             stack.add(currentCard!!)                                    // ! *currentCard!!* Smartcast vorschlag von IntelliJ
         }

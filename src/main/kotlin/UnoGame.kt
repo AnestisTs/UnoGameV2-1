@@ -79,7 +79,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             println("${player.name} ist jetzt am Zug.")                                                     // * Namensausgabe des ersten Spielers
             println("$currentCard")
             if (currentCard is DrawTwoCard){                                                        //
-               player.playerHand.drawTwo(deck, stack, currentCard)            // ! Karten werden
+               player.playerHand.drawTwo(deck, stack, currentCard)
             }
 
 
@@ -91,15 +91,15 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
 
 
             var playerHand = player.playerHand
-            var isPlayable = playerHand.hand.any { card -> currentCard?.color == card.color || currentCard?.value == card.value }   // * lambda benutzt, um eine Legbare Karte aus der Spielerhand zu finden
+            var isPlayable = playerHand.hand.any { card -> currentCard.color == card.color || currentCard.value == card.value }   // * lambda benutzt, um eine Legbare Karte aus der Spielerhand zu finden
             if (isPlayable) {
                 val chosenCardIndex = readln().toInt()                                                                  // * Kartenauswhal vom Spieler seiner Hand über Konsole
                 var chosenCard = playerHand.hand.elementAt(chosenCardIndex)                                                  // ? Ausgewählte Karte vom Spieler aus seiner Hand über Index
-                if (chosenCard.color == currentCard?.color || chosenCard.value == currentCard?.value) {
+                if (chosenCard.color == currentCard.color || chosenCard.value == currentCard.value) {
                     if (chosenCard is SkipCard){                                                                // ! IS durch chatgpt erlernt. Hätte ich das nicht gemacht
                         currentPlayer = chosenCard.skipPlayer(clockwisePlayerTurns, currentPlayer, numberPlayers)                     // ! könnte ich skipPlayer nicht benutzen
                     }
-                    if (chosenCard is ReverseCard){
+                    if (chosenCard is ReverseCard){                                                             // * Baue damit ein interface auf. Es werden die eigenschaften übernommen
                         clockwisePlayerTurns = chosenCard.reverseIt(clockwisePlayerTurns)
                     }
                     stack.add(chosenCard)
@@ -114,7 +114,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
 
             currentPlayer = getNextPlayerIndex()
             if (playerHand.hand.size == 0){
-                gameOver = true
+                gameOver = true                         // ! Spiel wieder von neu anfangen, karten müssen neu ausgeteilt werden
                 println("Spieler $currentPlayer hat gewonnen. Herzlichen glückwunsch, du bist ein noob.")
 
             }
