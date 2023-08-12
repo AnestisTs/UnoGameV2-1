@@ -1,8 +1,9 @@
-open class Player(var numberplayers: Int, var name: String, var isExperienced: Boolean,  ) {
+open class Player(var name: String) {
 
+    var playerHand: PlayerHand = PlayerHand(name)
    open fun battleCry(){
 
-        println("Zeit für ein... Dudududu Duellllll!")
+        println(" $name: Zeit für ein... Dudududu Duellllll!")
 
     }
 
@@ -17,7 +18,15 @@ open class Player(var numberplayers: Int, var name: String, var isExperienced: B
 
     }
 
+    open fun addStackToDeck(deck: MutableList<Card>, stack: MutableList<Card>, currentCard: Card){
 
+        stack.removeAt(0)       // ! was passiert hier?             // Karte wird runter genommen und zum stack hinzugegüht
+        deck.addAll(stack)                                              // * Mit addAll werden Listen zu Listen hinzugefügt
+        stack.clear()              // ! hier fehlerhaft
+        if (currentCard != null){                                       // ! Card könnte auch null sein, deswegen muss hier gecheckt werden, ob es ungleich null ist.
+            stack.add(currentCard!!)                                    // ! *currentCard!!* Smartcast vorschlag von IntelliJ
+        }
+    }
 
    open fun jokerMove(clockwisePlayerTurns: Boolean, currentPlayer: Int, numberPlayers: Int) : Int{                // ? Fähigkeit, eine Runde zu überspringen, quasi direkt noch eine Karte legen zu dürfen
 

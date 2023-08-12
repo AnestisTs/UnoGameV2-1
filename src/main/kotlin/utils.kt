@@ -1,8 +1,7 @@
-
 // * Die Inspiration hierfür, habe ich mir von Benni geholt.
 // * FEHLER BEHOBEN. *EINGEBAUT*. Baue ich ein, sobald mein Spiel wieder läuft. Estimated 1-2 fehler behebung.
 // * *GELÖST* Der Index zeigt immer die Farbe der vorherigen Karte an.
-
+// * playerHands wird mit 2 mutableLists of deklariert, weil es eine Liste an Listen von den Spieler Händen ist.
 // ! wenn reverse, skip funktion falsch
 // ! drawtwo noch fehlerhaft
 // ! ab einem gewissen punkt. werden immer weiter "Karten gezogen"
@@ -26,5 +25,25 @@ var reset = "\u001B[0m"
 
 // * FARBE DER KARTEN *
 
+
+fun getNumPlayers(): Int {
+
+    var incorrectUserInput: Boolean = false
+    var userInputPlayers = 2                                    // * Dummy Wert
+    do {
+        try {
+            println("Bitte gib die Anzahl an Spielern an (2-4)")
+            userInputPlayers = readln().toInt()                     // * Dummy wird überschrieben
+            incorrectUserInput = false
+
+        } catch (e: Exception) {
+            println("Das was du versuchst, macht keinen Sinn. Bitte versuche es erneut.")
+            incorrectUserInput = true
+        }
+
+    } while (incorrectUserInput)
+
+    return userInputPlayers
+}
 
 
