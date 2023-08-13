@@ -16,10 +16,13 @@
 // !! !!!! ab einem gewissen Punkt, wird in endlos schleife ein fehler ausgeworfen, der mich immer wieder karten ziehen lässt und alle runden überpsringt.
 // ! evtl weil die letzte karte nicht mit der currentcard übereinstimmt und ich damit einen fehler trigger?
 // ! deck & stack als klassen
-// ! reverse als erste karte führt nicht den geweünschten effekt auds
-// ! skip das gleiche
-// * Die Inspiration hierfür, habe ich mir von Benni geholt.
+// * FIXED reverse als erste karte führt nicht den geweünschten effekt aus
+// ! skip als erste karte führt nicht den geweünschten effekt aus
 
+
+
+
+// * Die Inspiration hierfür, habe ich mir von Benni geholt.
 // * FARBE DER KARTEN *
 
 var green = "\u001B[32m"
