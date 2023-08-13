@@ -1,12 +1,17 @@
 open class Player(var name: String) {
 
     var playerHand: PlayerHand = PlayerHand(name)
-   open fun battleCry(){
+  /* open fun battleCry(hand: PlayerHand){
 
-        println(" $name: Zeit für ein... Dudududu Duellllll!")
+       if(hand.size){
+
+           println(" $name: ZACK, Uno letzte Karte.. Deal with it")
+       }
+
+       println(" $name: ZACK, Uno letzte Karte.. Deal with it")
 
     }
-
+*/
    open fun countingWins(){
 
    }
@@ -18,34 +23,17 @@ open class Player(var name: String) {
     }
 
     open fun addStackToDeck(deck: MutableList<Card>, stack: MutableList<Card>, currentCard: Card){
-
+ // ! doppelte funktion ( siehte playerhand.kt ) sollte ich vielleicht mal schlafen gehen?
         stack.removeAt(0)                    // Karte wird runter genommen und zum stack hinzugegüht
         deck.addAll(stack)                                              // * Mit addAll werden Listen zu Listen hinzugefügt
         stack.clear()
         if (currentCard != null){                                       // ! Card könnte auch null sein, deswegen muss hier gecheckt werden, ob es ungleich null ist.
-            stack.add(currentCard!!)                                    // ! *currentCard!!* Smartcast vorschlag von IntelliJ
+            stack.add(currentCard!!)      // ! ...könnte !! aufgrund der änderung der card jetzt auch entfernen?       // ! *currentCard!!* Smartcast vorschlag von IntelliJ
+        println()
         }
     }
 
-   open fun jokerMove(clockwisePlayerTurns: Boolean, currentPlayer: Int, numberPlayers: Int) : Int{                // ? Fähigkeit, eine Runde zu überspringen, quasi direkt noch eine Karte legen zu dürfen
 
-       if(clockwisePlayerTurns) {
-           if(currentPlayer < (numberPlayers -1)) {
-               return currentPlayer + 1
-           } else {
-               return 0
-           }
-       } else {
-           if(currentPlayer > 0) {
-               return currentPlayer - 1
-           } else {
-               return numberPlayers - 1
-           }
-       }
-
-
-
-    }
 
 
 

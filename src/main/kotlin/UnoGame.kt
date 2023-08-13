@@ -10,7 +10,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
     var currentPlayer: Int = 0                                                          // * standartmäßig auf 0 gesetzt um den Spieler zu initialisieren
     var players : MutableList<Player> = mutableListOf()
     val deck: MutableList<Card> = mutableListOf()                                                   // * variable fürs deck erstellt mit einer mutablelist der Klasse Card als Datentyp.
-                                                    // ! draw2 wird hier hinzugefügt
+
     var clockwisePlayerTurns: Boolean = true
 
 
@@ -80,12 +80,16 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             println("$currentCard")
             if (currentCard is DrawTwoCard){                                                        //
                player.playerHand.drawTwo(deck, stack, currentCard)
+            } else if (currentCard is ReverseCard){
+                clockwisePlayerTurns = false
+            }else if (currentCard is SkipCard){
+                currentPlayer = (currentCard as SkipCard).skipPlayer(clockwisePlayerTurns, currentPlayer, numberPlayers)
             }
 
 
             val  playerHandWithIndex = player.playerHand.hand.withIndex()                                         // *  mit playerhands.get(currentplayer) wird das deck des momentanen spielers angezeigt. .withindex fügt die information des Index hinzu.
 
-            for ((index, card) in playerHandWithIndex) {                                                                  // * index, card sind in klammern, weil es ein syntax fehler geben würde. Es beinhaltet 2 informationen.
+            for ((index, card) in playerHandWithIndex) {                                                                        // * index, card sind in klammern, weil es ein syntax fehler geben würde. Es beinhaltet 2 informationen.
                 println("$index. $card")                                                                        // *  Anzeige auf der Konsole der Karten des momentan Spielers
             }
 
@@ -94,12 +98,18 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             var isPlayable = playerHand.hand.any { card -> currentCard.color == card.color || currentCard.value == card.value }   // * lambda benutzt, um eine Legbare Karte aus der Spielerhand zu finden
             if (isPlayable) {
                 val chosenCardIndex = readln().toInt()                                                                  // * Kartenauswhal vom Spieler seiner Hand über Konsole
+                if (chosenCardIndex <= playerHand.hand.size - 1){
+
+                }else{                                                                      // * sicherung zur korrekten eingabe des Indexes
+                    println("Du hast nur ${playerHand.hand.size-1} Karten auf der hand")
+                    return startGame()
+                }
                 var chosenCard = playerHand.hand.elementAt(chosenCardIndex)                                                  // ? Ausgewählte Karte vom Spieler aus seiner Hand über Index
                 if (chosenCard.color == currentCard.color || chosenCard.value == currentCard.value) {
-                    if (chosenCard is SkipCard){                                                                // ! IS durch chatgpt erlernt. Hätte ich das nicht gemacht
+                    if (chosenCard is SkipCard){                                                                        // ! ELSE IF einbauen    // ! IS durch chatgpt erlernt. Hätte ich das nicht gemacht
                         currentPlayer = chosenCard.skipPlayer(clockwisePlayerTurns, currentPlayer, numberPlayers)                     // ! könnte ich skipPlayer nicht benutzen
                     }
-                    if (chosenCard is ReverseCard){                                                             // * Baue damit ein interface auf. Es werden die eigenschaften übernommen
+                    else if (chosenCard is ReverseCard){                                                             // * Baue damit ein interface auf. Es werden die eigenschaften übernommen
                         clockwisePlayerTurns = chosenCard.reverseIt(clockwisePlayerTurns)
                     }
                     stack.add(chosenCard)

@@ -40,11 +40,10 @@ fun main() {
 
         } catch (e: Exception) {
             println("Das was du versuchst, macht keinen Sinn. Bitte versuche es erneut.")
-            println(e.message)
             incorrectUserInput = true
         }
     } while (incorrectUserInput)
-
+    println()
 
 }
 

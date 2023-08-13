@@ -1,18 +1,24 @@
-// * Die Inspiration hierfür, habe ich mir von Benni geholt.
 // * FEHLER BEHOBEN. *EINGEBAUT*. Baue ich ein, sobald mein Spiel wieder läuft. Estimated 1-2 fehler behebung.
 // * *GELÖST* Der Index zeigt immer die Farbe der vorherigen Karte an.
 // * playerHands wird mit 2 mutableLists of deklariert, weil es eine Liste an Listen von den Spieler Händen ist.
-// ! wenn reverse, skip funktion falsch
-// ! drawtwo noch fehlerhaft
-// ! ab einem gewissen punkt. werden immer weiter "Karten gezogen"
-// ! Spielstart fehlerhaft. trotz nein eingabe geht es einen schritt weiter.
-// ! Mehr Printlines zur Information der Regeln.
+// * FIXED wenn reverse, skip funktion falsch
+// * FIXED drawtwo noch fehlerhaft
+// * FIXED ab einem gewissen punkt. werden immer weiter "Karten gezogen"
+// * FIXED Spielstart fehlerhaft. trotz nein eingabe geht es einen schritt weiter.
+// * FIXED Mehr Printlines zur Information der Regeln.
 // ! Feedback falls falsche Kartenlegung *evlt die Person nächste Runde überspringen* / INFO
 // ? Kosmetische Verbesserung Wert. Vor KartenWert schreiben
 // ? Kosmetische verbesserung. Kommentare über den Code schreiben
 // ! Player klasse erstellen statt in der UnoGame.kt bsp name hand. evtl punkte Stand Mehr funktionen ( kampschrei )
 // ! stats funktion
 // ! user / KIuser erbt von player
+// ! IF Abfrage für die Eingabe des Indexes der Maximalen Karten auf der Hand bei Zeile 96? Chosecard
+// !! !!!! ab einem gewissen Punkt, wird in endlos schleife ein fehler ausgeworfen, der mich immer wieder karten ziehen lässt und alle runden überpsringt.
+// ! evtl weil die letzte karte nicht mit der currentcard übereinstimmt und ich damit einen fehler trigger?
+// ! deck & stack als klassen
+// ! reverse als erste karte führt nicht den geweünschten effekt auds
+// ! skip das gleiche
+// * Die Inspiration hierfür, habe ich mir von Benni geholt.
 
 // * FARBE DER KARTEN *
 
@@ -33,7 +39,7 @@ fun getNumPlayers(): Int {
     do {
         try {
             println("Bitte gib die Anzahl an Spielern an (2-4)")
-            userInputPlayers = readln().toInt()                     // * Dummy wird überschrieben
+            userInputPlayers = readln().toInt()                     // * Dummy Wert wird überschrieben
             incorrectUserInput = false
 
         } catch (e: Exception) {

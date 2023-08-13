@@ -5,12 +5,11 @@ class PlayerHand(name: String){
     fun drawCard(deck: MutableList<Card>, stack: MutableList<Card>, currentCard: Card){
 
 
-        if (deck.size <= 1) {
+        if (deck.size >= 1) {
             hand.add(deck.elementAt(0))
             deck.removeAt(0)
         }else{
            addStackToDeck(deck, stack, currentCard)
-
         }
 
     }
@@ -18,7 +17,7 @@ class PlayerHand(name: String){
 
         stack.removeAt(0)                                   // *  Karte wird runter genommen und zum stack hinzugegüht
         deck.addAll(stack)                                              // * Mit addAll werden Listen zu Listen hinzugefügt
-        stack.clear()
+        stack.clear()                                       //
         if (currentCard != null){                                       // ! Card könnte auch null sein, deswegen muss hier gecheckt werden, ob es ungleich null ist.
             stack.add(currentCard!!)                                    // ! *currentCard!!* Smartcast vorschlag von IntelliJ
         }
@@ -37,7 +36,7 @@ class PlayerHand(name: String){
     fun showPlayerHand(){
         println("Hand des Spielers ")
 
-        for ((index, card) in hand.withIndex()) {                                                                  // * index, card sind in klammern, weil es ein syntax fehler geben würde. Es beinhaltet 2 informationen.
+        for ((index, card) in hand.withIndex()) {                                                                    // * index, card sind in klammern, weil es ein syntax fehler geben würde. Es beinhaltet 2 informationen.
             println("$index. $card")                                                                        // *  Anzeige auf der Konsole der Karten des momentan Spielers
         }
     }
