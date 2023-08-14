@@ -84,19 +84,22 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
                 currentPlayer = getNextPlayerIndex()                        // ! passt noch nicht ganz, da hier der zweite spieler übersprungen wird...
             }
 
-
-            val  playerHandWithIndex = player.playerHand.hand.withIndex()                                         // *  mit playerhands.get(currentplayer) wird das deck des momentanen spielers angezeigt. .withindex fügt die information des Index hinzu.
+            // *  mit playerhands.get(currentplayer) wird das deck des momentanen spielers angezeigt. .withindex fügt die information des Index hinzu.
+            val  playerHandWithIndex = player.playerHand.hand.withIndex()
 
             player.playerHand.showPlayerHand()
 
 
             var playerHand = player.playerHand
-            var isPlayable = playerHand.hand.any { card -> currentCard.color == card.color || currentCard.value == card.value }   // * lambda benutzt, um eine Legbare Karte aus der Spielerhand zu finden
+            // * lambda benutzt, um eine Legbare Karte aus der Spielerhand zu finden
+            var isPlayable = playerHand.hand.any { card -> currentCard.color == card.color || currentCard.value == card.value }
             if (isPlayable) {
-                val chosenCardIndex = readln().toInt()                                                                  // * Kartenauswhal vom Spieler seiner Hand über Konsole
+                // * Kartenauswhal vom Spieler seiner Hand über Konsole
+                val chosenCardIndex = readln().toInt()
+                // * sicherung zur korrekten eingabe des Indexes
                 if (chosenCardIndex <= playerHand.hand.size - 1){
 
-                }else{                                                                      // * sicherung zur korrekten eingabe des Indexes
+                }else{
                     println("Du hast nur ${playerHand.hand.size-1} Karten auf der Hand, mach eine vernünftige Eingabe.")
                     return startGame()
                 }

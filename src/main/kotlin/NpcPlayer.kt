@@ -1,17 +1,16 @@
 class NpcPlayer(name: String) : Player(name) {
 
-    var hand : MutableList<Card> = mutableListOf<Card>()
 
 
-    fun chooseCardNpc(playerHand: List<Card>, currentCard: Card){
+    fun chooseCardNpc(playerHand: List<Card>, currentCard: Card) : Int{
 
+        val npcChoseCard = playerHand.filter { card -> currentCard.color == card.color || currentCard.value == card.value }
+        npcChoseCard.random()
 
-        val playableCards = hand.filter { card -> currentCard.color == card.color || currentCard.value == card.value }
-        playableCards.random()
-
-
+        return
 
     }
+
 
 
 
