@@ -1,15 +1,14 @@
 open class Player(var name: String) {
 
     var playerHand: PlayerHand = PlayerHand(name)
-  /* open fun battleCry(hand: PlayerHand){
+   open fun battleCry(hand: PlayerHand) {
 
-       if(hand.size){
-
+       if (playerHand.hand.size == 1) {
            println(" $name: ZACK, Uno letzte Karte.. Deal with it")
        }
 
-*/
 
+   }
 
     open fun addStackToDeck(deck: MutableList<Card>, stack: MutableList<Card>, currentCard: Card){
  // ! doppelte funktion ( siehte playerhand.kt ) sollte ich vielleicht mal schlafen gehen?

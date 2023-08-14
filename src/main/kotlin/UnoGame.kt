@@ -146,6 +146,8 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
 
             // * Spielrichtung im Uhrzeiger SInn
             currentPlayer = getNextPlayerIndex()
+            player.battleCry(PlayerHand(player.name))
+
             // * wenn die Karten auf der Hand leer sind, wird das Spiel beendet.
             if (playerHand.hand.size == 0){
                 gameOver = true
