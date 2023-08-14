@@ -45,7 +45,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
                 player.playerHand.hand.add(deck.removeAt(0))                 // * der Spieler bekommt dann 7 karten aus dem Deck und jede Karte wird am Index 0 aus dem Deck entfernt.
 
             }
-            players.add(player)                                // * die hand wird mit playerHands.add(hand) zur Liste playerHands hinzugefügt und somit Teil der Liste der Spielerhände.
+            players.add(player)                                // * die hand wird mit playerHands.add(player) zur Liste players hinzugefügt und somit Teil der Liste der Spielerhände.
 
         }
 
@@ -83,7 +83,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             } else if (currentCard is ReverseCard){
                 clockwisePlayerTurns = false
             }else if (currentCard is SkipCard){
-                currentPlayer = (currentCard as SkipCard).skipPlayer(clockwisePlayerTurns, currentPlayer, numberPlayers)
+                currentPlayer = getNextPlayerIndex()                        // ! passt noch nicht ganz, da hier der zweite spieler übersprungen wird...
             }
 
 

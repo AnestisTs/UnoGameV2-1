@@ -19,7 +19,7 @@ class PlayerHand(name: String){
         deck.addAll(stack)                                              // * Mit addAll werden Listen zu Listen hinzugefügt
         stack.clear()                                       //
         if (currentCard != null){                                       // ! Card könnte auch null sein, deswegen muss hier gecheckt werden, ob es ungleich null ist.
-            stack.add(currentCard!!)                                    // ! *currentCard!!* Smartcast vorschlag von IntelliJ
+            stack.add(currentCard)
         }
     }
 
