@@ -68,14 +68,15 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             }
         }
     }
-
-    fun startGame() {                                                                                        // * Eigentliche Beginn des Spiels
+    // * Eigentliche Beginn des Spiels
+    fun startGame() {
 
         while (!gameOver) {
             val player = players.get(currentPlayer)
-            println("${player.name} ist jetzt am Zug.")                                                     // * Namensausgabe des ersten Spielers
+            // * Namensausgabe des ersten Spielers
+            println("${player.name} ist jetzt am Zug.")
             println("$currentCard")
-            if (currentCard is DrawTwoCard){                                                        //
+            if (currentCard is DrawTwoCard){
                player.playerHand.drawTwo(deck, stack, currentCard)
             } else if (currentCard is ReverseCard){
                 clockwisePlayerTurns = false
