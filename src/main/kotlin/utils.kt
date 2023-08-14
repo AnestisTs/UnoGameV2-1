@@ -18,8 +18,22 @@
 // ! deck & stack als klassen
 // * FIXED reverse als erste karte führt nicht den geweünschten effekt aus
 // ! skip als erste karte führt nicht den geweünschten effekt aus
+// ! TODO NOW! npcplayer class erbend vom player erstellen mit spiellogic vom normalem game ! //
+// ! ^statt readln mit if else arbeiten
+// ! evlt karten nicht sichtbar machen
+// ! TODO in near feature if enough time/after fulfilling project requierments. ! //
+// ! TODO add class DECK&STACK for project improvement ! //
+// ! TODO add NPC class for project improvement ! //
 
 
+var currentCard: Card = Card(CardColor.BLUE, CardValue.FIVE)   // * Dummy wert, der direkt überschrieben wird                              // * Ist die gelegte Karte auf dem Stapel, die eine Aktion erfordert vom nächsten Spieler. ? = null fängt einen möglich crash ab für einen jetzt nicht existierenden Wert. // ? null wert eingebaut arbeite aber nicht mit 0 evlt try catch stattdessen benutzen?
+var stack = mutableListOf<Card>()                           // * Stack ist der Kartenstapel, der gelegten Karten und wird mit Card befüllt
+var gameOver: Boolean = false                                   // *  standartmäßiug falsch gesetzt, da dass Spiel fortlaufend ist
+var currentPlayer: Int = 0                                                          // * standartmäßig auf 0 gesetzt um den Spieler zu initialisieren
+var players : MutableList<Player> = mutableListOf()
+val deck: MutableList<Card> = mutableListOf()                                                   // * variable fürs deck erstellt mit einer mutablelist der Klasse Card als Datentyp.
+
+var clockwisePlayerTurns: Boolean = true
 
 
 // * Die Inspiration hierfür, habe ich mir von Benni geholt.

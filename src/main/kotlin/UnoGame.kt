@@ -4,54 +4,51 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
 
 
 
-    var currentCard: Card = Card(CardColor.BLUE, CardValue.FIVE)   // * Dummy wert, der direkt überschrieben wird                              // * Ist die gelegte Karte auf dem Stapel, die eine Aktion erfordert vom nächsten Spieler. ? = null fängt einen möglich crash ab für einen jetzt nicht existierenden Wert. // ? null wert eingebaut arbeite aber nicht mit 0 evlt try catch stattdessen benutzen?
-    var stack = mutableListOf<Card>()                           // * Stack ist der Kartenstapel, der gelegten Karten und wird mit Card befüllt
-    var gameOver: Boolean = false                                   // *  standartmäßiug falsch gesetzt, da dass Spiel fortlaufend ist
-    var currentPlayer: Int = 0                                                          // * standartmäßig auf 0 gesetzt um den Spieler zu initialisieren
-    var players : MutableList<Player> = mutableListOf()
-    val deck: MutableList<Card> = mutableListOf()                                                   // * variable fürs deck erstellt mit einer mutablelist der Klasse Card als Datentyp.
-
-    var clockwisePlayerTurns: Boolean = true
-
-
     init {                                                      // *  initialisierung vom Start des Kartenspiels
 
 
-                                                      // * hier läuft die schleife für jede Farbe durch
-                                                     // *  hier läuft die schleife für jeden Wert durch
-                                                      // * und hier wird jede Karte mit Farbe und wert kombiniert und dem Deck als Card hinzugefügt.
+        // * hier läuft die schleife für jede Farbe durch
         for (color in CardColor.entries) {
+            // *  hier läuft die schleife für jeden Wert durch
             for (value in CardValue.entries) {
+                // * skip Karte wird zum deck hinzugefügt
                 if (value == CardValue.SKIP) {
                     deck.add(SkipCard(color, value))
-
+               // * drawtwo Karte wird zum deck hinzugefügt
                 } else if (value == CardValue.DRAWTWO) {
                     deck.add(DrawTwoCard(color, value))
-
+                // * reverse Karte wird zum Deck hinzugefügt
                 } else if (value == CardValue.REVERSE){
                     deck.add(ReverseCard(color, value))
-
+                    // * und hier wird jede Karte mit Farbe und wert kombiniert und dem Deck als Card hinzugefügt.
                 } else {
                     deck.add(Card(color, value))
                 }
             }
         }
 
-
-        Collections.shuffle(deck)                                // * collections ist auf der util Bibiliothek von Java enthalten und mit .shuffle greift man auf dies Methode der  Klasse zu und Mischt in meinem Fall das Deck
-        for (i in 0 until numberPlayers) {                   // * schleife für kartenasugabe an anzahl der Spieler
-            val player = Player(playerNames.removeAt(0))    // * Der Player braucht immer ein Namen. Jeder Spieler hat einen Namen hierdurch und wird nicht doppelt angezeigt                  // * variable für die Hand des Spielers erstellen. Hier wird Eine mutableListOf (Card) verwendet.
-            for (j in 0 until 7) {                           // * schleife für Kartenausgabe an die Spieler (7 Karten)
-                player.playerHand.hand.add(deck.removeAt(0))                 // * der Spieler bekommt dann 7 karten aus dem Deck und jede Karte wird am Index 0 aus dem Deck entfernt.
+// * hier wird das deck geshuffled.
+        deck.shuffle()
+        // * schleife für kartenasugabe an anzahl der Spieler
+        for (i in 0 until numberPlayers) {
+            // * Der Player braucht immer ein Namen. Jeder Spieler hat einen Namen hierdurch und wird nicht doppelt angezeigt
+            val player = Player(playerNames.removeAt(0))
+            // * schleife für Kartenausgabe an die Spieler (7 Karten)
+            for (j in 0 until 7) {
+                // * der Spieler bekommt dann 7 karten aus dem Deck und jede Karte wird am Index 0 aus dem Deck entfernt.
+                player.playerHand.hand.add(deck.removeAt(0))
 
             }
-            players.add(player)                                // * die hand wird mit playerHands.add(player) zur Liste players hinzugefügt und somit Teil der Liste der Spielerhände.
+            players.add(player)                                // * die Spieler werden mit players.add(player) zur Liste players hinzugefügt und somit Teil der Liste der Spielerhände.
 
         }
 
-        val initialCard = deck.removeAt(0)                  // *  start Karte wird vom 0. Index bzw vom Anfang der "Liste" bzw des Decks entfernt
-        stack.add(initialCard)                                       // * start Karte zum Anfang des Spiels kommt auf den Stapel(Stack)
-        currentCard = initialCard                                    // * hier ist ein Fehler der immer wieder die initial card statt die currentcard anzeigen lässt // GELÖST // initialcard steht für die initialisierungsKarte des Spiels, quasi zum Anfang hin
+        // *  start Karte wird vom 0. Index bzw vom Anfang der "Liste" bzw des Decks entfernt
+        val initialCard = deck.removeAt(0)
+        // * start Karte zum Anfang des Spiels kommt auf den Stapel(Stack)
+        stack.add(initialCard)
+        // * initialcard steht für die initialisierungsKarte des Spiels, quasi zum Anfang hin
+        currentCard = initialCard                                    // * hier ist ein Fehler der immer wieder die initial card statt die currentcard anzeigen lässt // GELÖST
         println("Start Karte $initialCard")
     }
 
@@ -89,9 +86,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
 
             val  playerHandWithIndex = player.playerHand.hand.withIndex()                                         // *  mit playerhands.get(currentplayer) wird das deck des momentanen spielers angezeigt. .withindex fügt die information des Index hinzu.
 
-            for ((index, card) in playerHandWithIndex) {                                                                        // * index, card sind in klammern, weil es ein syntax fehler geben würde. Es beinhaltet 2 informationen.
-                println("$index. $card")                                                                        // *  Anzeige auf der Konsole der Karten des momentan Spielers
-            }
+            player.playerHand.showPlayerHand()
 
 
             var playerHand = player.playerHand
@@ -101,7 +96,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
                 if (chosenCardIndex <= playerHand.hand.size - 1){
 
                 }else{                                                                      // * sicherung zur korrekten eingabe des Indexes
-                    println("Du hast nur ${playerHand.hand.size-1} Karten auf der hand")
+                    println("Du hast nur ${playerHand.hand.size-1} Karten auf der Hand, mach eine vernünftige Eingabe.")
                     return startGame()
                 }
                 var chosenCard = playerHand.hand.elementAt(chosenCardIndex)                                                  // ? Ausgewählte Karte vom Spieler aus seiner Hand über Index
@@ -125,7 +120,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             currentPlayer = getNextPlayerIndex()
             if (playerHand.hand.size == 0){
                 gameOver = true                         // ! Spiel wieder von neu anfangen, karten müssen neu ausgeteilt werden
-                println("Spieler $currentPlayer hat gewonnen. Herzlichen glückwunsch, du bist ein noob.")
+                println("Spieler ${player.name} hat gewonnen. Herzlichen glückwunsch, du bist ein noob.")
 
             }
             println("################################")

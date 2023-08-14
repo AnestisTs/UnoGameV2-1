@@ -34,7 +34,7 @@ class PlayerHand(name: String){
     }
 
     fun showPlayerHand(){
-        println("Hand des Spielers ")
+       // println("Hand des Spielers $currentPlayer")
 
         for ((index, card) in hand.withIndex()) {                                                                    // * index, card sind in klammern, weil es ein syntax fehler geben würde. Es beinhaltet 2 informationen.
             println("$index. $card")                                                                        // *  Anzeige auf der Konsole der Karten des momentan Spielers
