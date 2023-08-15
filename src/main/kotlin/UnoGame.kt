@@ -19,7 +19,6 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
     // *  initialisierung vom Start des Kartenspiels
     init {
 
-
         // * hier läuft die schleife für jede Farbe durch
         for (color in CardColor.entries) {
             // *  hier läuft die schleife für jeden Wert durch
@@ -66,7 +65,6 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
         println("Start Karte $initialCard")
     }
 
-
     fun getNextPlayerIndex(): Int {
         if(clockwisePlayerTurns) {
             if(currentPlayer < (numberPlayers -1)) {
@@ -103,7 +101,6 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             // *  mit playerhands.get(currentplayer) wird das deck des momentanen spielers angezeigt. .withindex fügt die information des Index hinzu.
 
             player.playerHand.showPlayerHand()
-
 
             var playerHand = player.playerHand
             // * lambda benutzt, um eine Legbare Karte aus der Spielerhand zu finden
@@ -143,7 +140,6 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
                 // * wenn die bedingungen von isPlayable nicht erfüllt werden, wird der Spieler gebeten eine Karte zu ziehen und tut dies.
                 // *  Die funktion hierfür ist in PlayerHand.kt >>>
                 playerHand.drawCard(deck, stack, currentCard)
-
             }
 
             // * Spielrichtung im Uhrzeiger SInn
@@ -156,14 +152,12 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
                 gameOver = true
                 // * Der Gewinner wird hier angezeigt.
                 println("Spieler ${player.name} hat gewonnen. Herzlichen glückwunsch, du bist ein noob.")
-
             }
             println("################################")
         }
 
-
     }
 
-
 }
+
 

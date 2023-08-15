@@ -9,6 +9,4 @@ class DrawTwoCard(color: CardColor, value: CardValue) : Card(color, value) {
         return drawnCards
     }
 
-
-
 }

@@ -11,10 +11,6 @@ class NpcPlayer(name: String) : Player(name) {
         return npcChoseCard.random()
     }
 
-
-
-
-
 }
 
 
@@ -23,4 +19,5 @@ class NpcPlayer(name: String) : Player(name) {
 // ! TODO^ liste.random würde die Karte ausgeben können
 // ! TODO^ if/else für den NPC anstelle von readln wie bei dem Menschlichen Spieler
 
-// val npcPlayer = players.get(currentPlayer)
+// ! hier drunter steht der code für die mögliche einbaute des npcplayers.
+

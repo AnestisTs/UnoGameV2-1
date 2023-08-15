@@ -21,10 +21,4 @@ open class Player(var name: String) {
         }
     }
 
-
-
-
-
-
-
 }
