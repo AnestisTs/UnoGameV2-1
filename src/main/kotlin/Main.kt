@@ -25,7 +25,16 @@ fun main() {
                 for (i in userInputPlayers downTo 1){
                     playerNames.add(readln())
                 }
-                if (userInputPlayers in 2 until 4) {
+
+                var userInputNpcPlayers = getNumPlayers(true)
+                if (userInputNpcPlayers > 0) {
+                    for (i in userInputNpcPlayers downTo  1){
+                        playerNames.add("Npc$i")
+                    }
+                    userInputPlayers += userInputNpcPlayers
+                }
+
+                if (userInputPlayers in 2 .. 4) {
                     val unoGame: UnoGame = UnoGame(userInputPlayers, playerNames)
                     unoGame.startGame()
    //                 println("Du hast nicht zwischen 2-4 Spielern ausgewählt. Lies das nochmal und versuchs erneut..") // ! wo anders hin

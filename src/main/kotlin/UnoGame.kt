@@ -44,7 +44,14 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
         // * schleife für kartenasugabe an anzahl der Spieler
         for (i in 0 until numberPlayers) {
             // * Der Player braucht immer ein Namen. Jeder Spieler hat einen Namen hierdurch und wird nicht doppelt angezeigt
-            val player = Player(playerNames.removeAt(0))
+            var player = Player("")
+            // * wenn der Spielername Npc enthält, wird ein Npc spieler erstellt.
+            if (playerNames.first().contains("Npc")){
+                player = NpcPlayer(playerNames.removeAt(0))
+
+            }else{
+                player = Player(playerNames.removeAt(0))
+            }
             // * schleife für Kartenausgabe an die Spieler (7 Karten)
             for (j in 0 until 7) {
                 // * der Spieler bekommt dann 7 karten aus dem Deck und jede Karte wird am Index 0 aus dem Deck entfernt.
@@ -97,7 +104,6 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             }else if (currentCard is SkipCard){
                 currentPlayer = getNextPlayerIndex()
             }
-            println("$clockwisePlayerTurns richtung")
             // *  mit playerhands.get(currentplayer) wird das deck des momentanen spielers angezeigt. .withindex fügt die information des Index hinzu.
 
             player.playerHand.showPlayerHand()
