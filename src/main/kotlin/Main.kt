@@ -25,10 +25,12 @@ fun main() {
                 for (i in userInputPlayers downTo 1){
                     playerNames.add(readln())
                 }
-                if (userInputPlayers in 2..4) {
+                if (userInputPlayers in 2 until 4) {
                     val unoGame: UnoGame = UnoGame(userInputPlayers, playerNames)
                     unoGame.startGame()
    //                 println("Du hast nicht zwischen 2-4 Spielern ausgewählt. Lies das nochmal und versuchs erneut..") // ! wo anders hin
+                }else{
+                    incorrectUserInput = true
                 }
             } else if (userInput == "nein") {
                 println("Angst, Potter? Dann ein andern Mal.")

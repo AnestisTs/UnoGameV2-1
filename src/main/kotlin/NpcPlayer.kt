@@ -2,11 +2,10 @@ class NpcPlayer(name: String) : Player(name) {
 
 
 
-    fun chooseCardNpc(playerHand: List<Card>, currentCard: Card) : Card{
+    fun chooseCardNpc(currentCard: Card) : Card{
 
         // * lambda funktion zum filtern. Gibt eine Liste mit den passenden Karten wieder.
-        val npcChoseCard = playerHand.filter { card -> currentCard.color == card.color || currentCard.value == card.value }
-        npcChoseCard.random()
+        val npcChoseCard = playerHand.hand.filter { card -> currentCard.color == card.color || currentCard.value == card.value }
 
         return npcChoseCard.random()
     }
@@ -19,5 +18,4 @@ class NpcPlayer(name: String) : Player(name) {
 // ! TODO^ liste.random würde die Karte ausgeben können
 // ! TODO^ if/else für den NPC anstelle von readln wie bei dem Menschlichen Spieler
 
-// ! hier drunter steht der code für die mögliche einbaute des npcplayers.
 

@@ -97,7 +97,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             }else if (currentCard is SkipCard){
                 currentPlayer = getNextPlayerIndex()
             }
-
+            println("$clockwisePlayerTurns richtung")
             // *  mit playerhands.get(currentplayer) wird das deck des momentanen spielers angezeigt. .withindex fügt die information des Index hinzu.
 
             player.playerHand.showPlayerHand()
@@ -106,18 +106,14 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             // * lambda benutzt, um eine Legbare Karte aus der Spielerhand zu finden
             var isPlayable = playerHand.hand.any { card -> currentCard.color == card.color || currentCard.value == card.value }
             if (isPlayable) {
-                // * Kartenauswhal vom Spieler seiner Hand über Konsole
-                val chosenCardIndex = readln().toInt()
-                // * sicherung zur korrekten eingabe des Indexes
-                if (chosenCardIndex <= playerHand.hand.size - 1){
-
+                var chosenCard = Card(CardColor.BLUE, CardValue.FIVE)
+                if (player is NpcPlayer){
+                    chosenCard = player.chooseCardNpc(currentCard)
                 }else{
-                    // * ist die Eingabe nicht korrekt, wird die Anzahl an Karten des spielers angezeigt und er hat einen neuen Versuch.
-                    println("Du hast nur ${playerHand.hand.size-1} Karten auf der Hand, mach eine vernünftige Eingabe.")
-                    return startGame()
+                    // * Kartenauswhal vom Spieler seiner Hand über Konsole // * Ausgewählte Karte vom Spieler aus seiner Hand über Index
+                         chosenCard = player.chooseCard()
                 }
-                // * Ausgewählte Karte vom Spieler aus seiner Hand über Index
-                var chosenCard = playerHand.hand.elementAt(chosenCardIndex)
+
                 if (chosenCard.color == currentCard.color || chosenCard.value == currentCard.value) {
                    // * chosencard wird hier als Skipcard deklariert. durch "is" werden die eigenschaften übernommen. // * Baue damit ein interface auf.
                     // ! IS durch chatgpt erlernt. Hätte ich das nicht gemacht, könnte ich skipPlayer nicht benutzen
