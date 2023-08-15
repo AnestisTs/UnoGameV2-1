@@ -14,7 +14,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
     // * variable fürs deck erstellt mit einer mutablelist der Klasse Card als Datentyp.
     val deck: MutableList<Card> = mutableListOf()
     var firstRound = true
-    var clockwisePlayerTurns: Boolean = false  // ! testlauf, dran denken wieder true
+    var clockwisePlayerTurns: Boolean = true
     var disableDrawTwoCard = false
 
     // *  initialisierung vom Start des Kartenspiels

@@ -11,7 +11,6 @@ fun main() {
     )
 
     var incorrectUserInput: Boolean = false
-
     do {
 
         try {
@@ -19,27 +18,30 @@ fun main() {
             var userInput = readln().lowercase()
 
             if (userInput == "ja") {
-                var userInputPlayers = getNumPlayers()
+                var userInputPlayers = getNumPlayers(false, 4)
                 var playerNames: MutableList<String> = mutableListOf()
                 println("Bitte geb noch die Namen für $userInputPlayers Spieler ein")
-                for (i in userInputPlayers downTo 1){
+                for (i in userInputPlayers downTo 1) {
                     playerNames.add(readln())
                 }
-
-                var userInputNpcPlayers = getNumPlayers(true)
-                if (userInputNpcPlayers > 0) {
-                    for (i in userInputNpcPlayers downTo  1){
-                        playerNames.add("Npc$i")
+                if (userInputPlayers < 4) {
+                    var maximumNpcPlayers = 4 - userInputPlayers
+                    var userInputNpcPlayers = getNumPlayers(true, maximumNpcPlayers)
+                    if (userInputNpcPlayers > 0) {
+                        for (i in 1 .. userInputNpcPlayers) {
+                            playerNames.add("Npc$i")
+                        }
+                        userInputPlayers += userInputNpcPlayers
                     }
-                    userInputPlayers += userInputNpcPlayers
                 }
-3
 
-                if (userInputPlayers in 2 .. 4) {
+                3
+
+                if (userInputPlayers in 2..4) {
                     val unoGame: UnoGame = UnoGame(userInputPlayers, playerNames)
                     unoGame.startGame()
-   //                 println("Du hast nicht zwischen 2-4 Spielern ausgewählt. Lies das nochmal und versuchs erneut..") // ! wo anders hin
-                }else{
+                    //                 println("Du hast nicht zwischen 2-4 Spielern ausgewählt. Lies das nochmal und versuchs erneut..") // ! wo anders hin
+                } else {
                     incorrectUserInput = true
                 }
             } else if (userInput == "nein") {

@@ -8,7 +8,7 @@ var magenta = "\u001B[35m"
 var reset = "\u001B[0m"
 // * FARBE DER KARTEN *
 
-fun getNumPlayers(npc: Boolean = false): Int {
+fun getNumPlayers(npc: Boolean = false, maxPlayers: Int): Int {
 
     var incorrectUserInput: Boolean = false
     // * Dummy Wert
@@ -23,7 +23,7 @@ fun getNumPlayers(npc: Boolean = false): Int {
     }
     do {
         try {
-            println("Bitte gib die Anzahl an $player an (2-4)")
+            println("Bitte gib die Anzahl an $player an (maximal $maxPlayers)")
             // * Dummy Wert wird hier mit usereingabe überschrieben
             userInputPlayers = readln().toInt()
             incorrectUserInput = false
