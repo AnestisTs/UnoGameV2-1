@@ -15,10 +15,14 @@ class PlayerHand(name: String){
     }
     fun addStackToDeck(deck: MutableList<Card>, stack: MutableList<Card>, currentCard: Card){
 
-        stack.removeAt(0)                                   // *  Karte wird runter genommen und zum stack hinzugegüht
-        deck.addAll(stack)                                              // * Mit addAll werden Listen zu Listen hinzugefügt
+        // *  Karte wird oben vom Stack runter genommen und zum stack hinzugegüht
+        stack.removeAt(0)
+        // * Mit addAll werden Listen zu Listen hinzugefügt (in meinem Fall das stack zum deck)
+        deck.addAll(stack)
+        // * hier wird der Stack gecleared(komplett entleert)
         stack.clear()                                       //
-        if (currentCard != null){                                       // ! Card könnte auch null sein, deswegen muss hier gecheckt werden, ob es ungleich null ist.
+        // ! Card könnte auch null sein, deswegen muss hier gecheckt werden, ob es ungleich null ist.
+        if (currentCard != null){
             stack.add(currentCard)
         }
     }
@@ -26,7 +30,7 @@ class PlayerHand(name: String){
     fun drawTwo(deck: MutableList<Card>, stack: MutableList<Card>, currentCard: Card){
 
         if (deck.size < 2){
-            addStackToDeck(deck, stack, currentCard)                                                                // * fügt dass den Stack zum Deck hinzu, wenn weniger als 2 Karten in dem Deck sind.
+            addStackToDeck(deck, stack, currentCard)                                                                // * fügt das Stack zum Deck hinzu, wenn weniger als 2 Karten in dem Deck sind.
         }
         hand.addAll((currentCard as DrawTwoCard).drawTwo(deck))                        // ! IntelliJ hat mir das so als Lösung vorgeschlagen lol (Smartcast).
         println()

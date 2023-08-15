@@ -90,16 +90,17 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
             // * Namensausgabe des ersten Spielers
             println("${player.name} ist jetzt am Zug.")
             println("$currentCard")
+            // * hier ist die currentCard noch die initialcard(anfangskarte). wenn diese zu beginn eine drawtwo ist, werden 2 karten der Spielerhand hinzugefügt
             if (currentCard is DrawTwoCard){
                player.playerHand.drawTwo(deck, stack, currentCard)
+           // * ist die erste Karte eine ReverseCard, wird die Spielrichtung direkt zu Anfang geändert und es geht nach dem ersten zum letzten Spieler
             } else if (currentCard is ReverseCard){
                 clockwisePlayerTurns = false
             }else if (currentCard is SkipCard){
-                currentPlayer = getNextPlayerIndex() + 1
+                currentPlayer = getNextPlayerIndex()
             }
 
             // *  mit playerhands.get(currentplayer) wird das deck des momentanen spielers angezeigt. .withindex fügt die information des Index hinzu.
-            val  playerHandWithIndex = player.playerHand.hand.withIndex()
 
             player.playerHand.showPlayerHand()
 
@@ -114,6 +115,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
                 if (chosenCardIndex <= playerHand.hand.size - 1){
 
                 }else{
+                    // * ist die Eingabe nicht korrekt, wird die Anzahl an Karten des spielers angezeigt und er hat einen neuen Versuch.
                     println("Du hast nur ${playerHand.hand.size-1} Karten auf der Hand, mach eine vernünftige Eingabe.")
                     return startGame()
                 }
@@ -146,6 +148,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
 
             // * Spielrichtung im Uhrzeiger SInn
             currentPlayer = getNextPlayerIndex()
+            // * Ansage "Uno letzte Karte..." wenn Karten der Spieler Hand auf 1 sind. Player.kt>>
             player.battleCry(PlayerHand(player.name))
 
             // * wenn die Karten auf der Hand leer sind, wird das Spiel beendet.
