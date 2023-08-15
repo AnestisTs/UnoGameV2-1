@@ -13,8 +13,9 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
     var players : MutableList<Player> = mutableListOf()
     // * variable fürs deck erstellt mit einer mutablelist der Klasse Card als Datentyp.
     val deck: MutableList<Card> = mutableListOf()
-
-    var clockwisePlayerTurns: Boolean = true
+    var firstRound = true
+    var clockwisePlayerTurns: Boolean = false  // ! testlauf, dran denken wieder true
+    var disableDrawTwoCard = false
 
     // *  initialisierung vom Start des Kartenspiels
     init {
@@ -91,19 +92,29 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
     fun startGame() {
 
         while (!gameOver) {
+            // * firstround muss zu erst sein, da es einfluss auf den ersten spieler bzw der ersten runde hat.
+           if (firstRound) {
+               // * ist die erste Karte eine ReverseCard, wird die Spielrichtung direkt zu Anfang geändert und es geht nach dem ersten zum letzten Spieler
+
+               if (currentCard is ReverseCard) {
+                   clockwisePlayerTurns = !clockwisePlayerTurns
+               } else if (currentCard is SkipCard) {
+                   currentPlayer = getNextPlayerIndex()
+               }
+           }
+            firstRound = false
             val player = players.get(currentPlayer)
             // * Namensausgabe des ersten Spielers
             println("${player.name} ist jetzt am Zug.")
             println("$currentCard")
+
+            // * muss ausgeführt werden, nachdem wir uns den Spieler geholt haben, damit es auch den richtigen Spieler trifft.
             // * hier ist die currentCard noch die initialcard(anfangskarte). wenn diese zu beginn eine drawtwo ist, werden 2 karten der Spielerhand hinzugefügt
-            if (currentCard is DrawTwoCard){
-               player.playerHand.drawTwo(deck, stack, currentCard)
-           // * ist die erste Karte eine ReverseCard, wird die Spielrichtung direkt zu Anfang geändert und es geht nach dem ersten zum letzten Spieler
-            } else if (currentCard is ReverseCard){
-                clockwisePlayerTurns = false
-            }else if (currentCard is SkipCard){
-                currentPlayer = getNextPlayerIndex()
+            if (currentCard is DrawTwoCard && !disableDrawTwoCard) {
+                player.playerHand.drawTwo(deck, stack, currentCard)
             }
+            // * muss wieder auf false gesetzt werden sonst funktioniert die drawtwo funktion nicht mehr
+            disableDrawTwoCard = false
             // *  mit playerhands.get(currentplayer) wird das deck des momentanen spielers angezeigt. .withindex fügt die information des Index hinzu.
 
             player.playerHand.showPlayerHand()
@@ -141,6 +152,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
                 println("bitte ziehe eine Karte")
                 // * wenn die bedingungen von isPlayable nicht erfüllt werden, wird der Spieler gebeten eine Karte zu ziehen und tut dies.
                 // *  Die funktion hierfür ist in PlayerHand.kt >>>
+                disableDrawTwoCard = true
                 playerHand.drawCard(deck, stack, currentCard)
             }
 

@@ -33,6 +33,7 @@ fun main() {
                     }
                     userInputPlayers += userInputNpcPlayers
                 }
+3
 
                 if (userInputPlayers in 2 .. 4) {
                     val unoGame: UnoGame = UnoGame(userInputPlayers, playerNames)
