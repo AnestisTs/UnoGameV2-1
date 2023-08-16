@@ -1,5 +1,8 @@
 open class Card (val color: CardColor, val value: CardValue){
-      override fun toString(): String {
+
+    // * hier setze ich für meine println eine ordentliche Ausgabe der Card. (Z.B. Grün 5)
+    override fun toString(): String {
+        // * Zusätlich hab ich eine Farbausgabe in der Konsole hinzugefügt. z.b $red kommt aus der utils.kt
         if (color.cardColor == "Rot") {
             return "$red ${color.cardColor} - ${value.numbers}  $reset"
         } else if (color.cardColor == "Grün") {
@@ -15,7 +18,8 @@ open class Card (val color: CardColor, val value: CardValue){
 
 
 
-
+// * habe mich für enums entschieden statt meiner ursprünglichen Liste für das Kartendeck, da ich unteranderem bei der Farbausgabe der Karten
+// * eine verschiedene Farbe für Kartenfarbe und Kartenzahl hatte. z.b. grün 5 war die Kartenfarbe grün, und der Wert war Rot.
 enum class CardValue(val numbers: String){
     TWO("2",),
     THREE("3"),

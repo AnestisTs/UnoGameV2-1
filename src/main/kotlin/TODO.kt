@@ -13,7 +13,7 @@
 // * user / KIuser erbt von player *PLAYER&NPCPLAYER in meinem fall. *DONE*
 // * IF Abfrage für die Eingabe des Indexes der Maximalen Karten auf der Hand. Chosecard *DONE*
 // * ab einem gewissen Punkt, wird in endlos schleife ein fehler ausgeworfen, der mich immer wieder karten ziehen lässt und alle runden überpsringt. *DONE*
-// *Lag an der drawCard funktion..*
+// * Lag an der drawCard funktion..*
 // ? deck & stack als klassen ... Auf später verschoben, einfach zum spaß das Spiel bearbeiten.
 // * FIXED reverse als erste karte führt nicht den geweünschten effekt aus
 // * skip als erste karte führt nicht den geweünschten effekt aus *DONE*

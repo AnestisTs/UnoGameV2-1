@@ -21,6 +21,7 @@ fun main() {
                 var userInputPlayers = getNumPlayers(false, 4)
                 var playerNames: MutableList<String> = mutableListOf()
                 println("Bitte geb noch die Namen für $userInputPlayers Spieler ein")
+                // * für jeden spieler, den ich eingegeben bhabe, läuft die schleife einmal durch, dass man einen namen eingeben kann.
                 for (i in userInputPlayers downTo 1) {
                     playerNames.add(readln())
                 }

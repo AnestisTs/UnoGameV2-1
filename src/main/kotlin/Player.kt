@@ -13,12 +13,15 @@ open class Player(var name: String) {
     // * sicherung zur korrekten eingabe des Indexes in eine Methode innerhalb der Player.kt verschoben. Lesbarer Code.
     open fun chooseCard(): Card {
 
+        // * -1 dummy wert, damit die schleife das erste mal läuft, und der nutzer die chance hat, eine eingabe zu tätigen.
         var chosenCardIndex = -1
-        var maxCardIndex = playerHand.hand.size
+        // * size ist eine nummerierung die bei 1 starten, ich arbeite aber mit einem index.
+        var maxCardIndex = playerHand.hand.size -1
         var wrongUserInput = false
 
-        // * Until< ist wie kleiner maxCardIndex, deswegen konnte ich die playerhand.hand.size nehmen, ohne -1 rechnen
-        while (!(chosenCardIndex in 0 until maxCardIndex)) {
+
+        // * solange der chosencardindex NICHT im rahmen der erlaubten werte ist, läuft diese schleife
+        while (!(chosenCardIndex in 0 .. maxCardIndex)) {
             if (wrongUserInput) {
                 println("Du hast nur ${maxCardIndex} Karten auf der Hand, lern bitte zählen/lesen und versuchs erneut.")
 
@@ -26,6 +29,7 @@ open class Player(var name: String) {
            try {
                chosenCardIndex = readln().toInt()
 
+            // * wieder auf -1 gesetzt, damit man sichergeht, dass der nutzer aufjeden Fall nochmals die chance hat, den richtigen wert einzugeben *schleife nochmals starten*
            }catch (e: Exception){
                 chosenCardIndex = -1
 
