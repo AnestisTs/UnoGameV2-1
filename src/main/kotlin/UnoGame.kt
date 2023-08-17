@@ -21,6 +21,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
     // *  initialisierung vom Start des Kartenspiels
     init {
 
+        // * intellij hat mich auf entries ge
         // * die kombinationen aus farbe und wert sind immer einzigartig. deswegen kann man mit zwei for schleifen das deck komplett generieren.
         // * hier läuft die schleife für jede Farbe durch
         for (color in CardColor.entries) {
@@ -146,6 +147,7 @@ class UnoGame(var numberPlayers: Int, var playerNames: MutableList<String>){
                 if (chosenCard.color == currentCard.color || chosenCard.value == currentCard.value) {
                    // * chosencard wird hier als Skipcard deklariert. durch "is" werden die eigenschaften übernommen.
                     // ! IS durch chatgpt erlernt. Hätte ich das nicht gemacht, könnte ich skipPlayer nicht benutzen
+                    // *  hier wird gefragt ob die karte eine skipcard ist
                     if (chosenCard is SkipCard){
                          // * überspringt den Spieler, auf den die Karte gelegt wurde.
                         currentPlayer = chosenCard.skipPlayer(clockwisePlayerTurns, currentPlayer, numberPlayers)

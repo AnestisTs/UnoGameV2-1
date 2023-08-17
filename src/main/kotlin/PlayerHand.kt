@@ -32,6 +32,7 @@ class PlayerHand(name: String){
         }
         // *
         // ! IntelliJ hat mir das so als Lösung vorgeschlagen lol (Smartcast).
+        // * hier wird currentcard auf drawtwocard gesetzt
         hand.addAll((currentCard as DrawTwoCard).drawTwo(deck))
         println()
 
